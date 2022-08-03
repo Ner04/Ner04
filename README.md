@@ -1,7 +1,7 @@
 - 👋 Hi, I’m @Ner04
 - 👀 I’m interested in machine learning and Full stack developing
 - 🌱 I’m currently learning django 
-- 💞️ I’m looking to collaborate on any open source project related to machine learning
+- 💞️ I’m looking to collaborate on any open source project related to machine learning and full stack developing
 - 📫 How to reach me shubhamnayak0905@gmail.com
 
 <!---
