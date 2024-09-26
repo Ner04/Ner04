@@ -1,10 +1,5 @@
-- 👋 Hi, I’m @Ner04
-- 👀 I’m interested in machine learning and Full stack developing
-- 🌱 I’m currently learning django 
-- 💞️ I’m looking to collaborate on any open source project related to machine learning and full stack developing
-- 📫 How to reach me shubhamnayak0905@gmail.com
-
-<!---
-Ner04/Ner04 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+👋 Hi, I’m @Ner04
+👀 I’m interested in cloud-native solutions, microservices architecture, and full-stack development.
+🌱 I’m currently working with Java, Spring Boot, React.js, AWS, Kubernetes, and Docker.
+💞️ I’m looking to collaborate on any open source projects related to cloud-native technologies, CI/CD automation, and full-stack development.
+📫 How to reach me: shubhamnayak0905@gmail.com
