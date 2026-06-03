@@ -1,9 +1,13 @@
-👋 Hi, I’m @Ner04
+👋 Hi, I'm Shubham
 
-👀 I’m interested in cloud-native solutions, microservices architecture, and full-stack development.
+Software Engineer focused on Backend Engineering, Distributed Systems, and Cloud-Native Technologies.
 
-🌱 I’m currently working with Java, Spring Boot, React.js, AWS, Kubernetes, and Docker.
+Java • Spring Boot • Kafka • PostgreSQL • AWS • Kubernetes
 
-💞️ I’m looking to collaborate on any open source projects related to cloud-native technologies, CI/CD automation, and full-stack development.
+Exploring AI-powered applications through LLM integrations, agentic workflows, retrieval-augmented systems, and developer productivity tools.
 
-📫 How to reach me: shubhamnayak0905@gmail.com
+Experience designing backend platforms, authentication systems, event-driven architectures, system design tooling, and scalable web applications.
+
+Currently deep-diving into Data Structures & Algorithms, Low-Level Design, High-Level Design, Distributed Systems, and AI-assisted software engineering.
+
+📫 [shubhamnayak0904@gmail.com](mailto:shubhamnayak0904@gmail.com)
