@@ -14,6 +14,8 @@ import os
 from datetime import date
 from xml.sax.saxutils import escape
 
+from smil import fade_in
+
 # GitHub's dark-theme contribution palette, level 0 through 4.
 LEVELS = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"]
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -70,7 +72,6 @@ def main():
     width = args.padding * 2 + day_label_w + grid_w
     height = args.padding * 2 + label_h + 7 * step - args.gap + 22
 
-    per_week = args.duration / max(weeks, 1)
 
     title = args.title or (
         f"{data['total']} contributions  ·  {data['start']} → {data['end']}"
@@ -114,15 +115,13 @@ def main():
         y = origin_y + row * step
         fill = LEVELS[level_for(day["count"], thresholds)]
 
-        begin = round(week * per_week, 3)
         plural = "" if day["count"] == 1 else "s"
 
         out.append(
             f'    <rect x="{x}" y="{y}" width="{args.cell}" '
-            f'height="{args.cell}" rx="2" fill="{fill}" opacity="0">'
+            f'height="{args.cell}" rx="2" fill="{fill}" opacity="1">'
             f'<title>{day["count"]} contribution{plural} on {day["date"]}</title>'
-            f'<animate attributeName="opacity" from="0" to="1" '
-            f'begin="{begin}s" dur="{round(per_week * 6, 3)}s" fill="freeze"/>'
+            f'{fade_in(week, weeks, args.duration)}'
             f'</rect>'
         )
     out.append('  </g>')

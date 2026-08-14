@@ -14,6 +14,8 @@ import json
 import os
 from xml.sax.saxutils import escape
 
+from smil import fade_in
+
 THEME = {
     "background": "#0d1117",
     "border": "#30363d",
@@ -47,14 +49,11 @@ def main():
     total_lines = len(rows) + 4
     height = args.padding * 2 + int(total_lines * args.line_height)
 
-    stagger = args.duration / max(total_lines, 1)
     key_w = max((len(r[0]) for r in rows if r[0]), default=0)
 
     def fade(index):
         """SMIL fade-in for the nth line, frozen once it lands."""
-        return (f'<animate attributeName="opacity" from="0" to="1" '
-                f'begin="{round(index * stagger, 3)}s" '
-                f'dur="{round(stagger * 2, 3)}s" fill="freeze"/>')
+        return fade_in(index, total_lines, args.duration)
 
     x = args.padding
     out = [
@@ -68,17 +67,17 @@ def main():
 
     y = args.padding + args.line_height
     out.append(f'    <text x="{x}" y="{y}" fill="{THEME["accent"]}" '
-               f'font-weight="700" opacity="0">{escape(header)}{fade(0)}</text>')
+               f'font-weight="700" opacity="1">{escape(header)}{fade(0)}</text>')
 
     y += args.line_height
     out.append(f'    <text x="{x}" y="{y}" fill="{THEME["muted"]}" '
-               f'opacity="0">{"-" * len(header)}{fade(1)}</text>')
+               f'opacity="1">{"-" * len(header)}{fade(1)}</text>')
 
     for i, (key, value) in enumerate(rows):
         y += args.line_height
         label = f"{key}:".ljust(key_w + 2) if key else " " * (key_w + 2)
         out.append(
-            f'    <text x="{x}" y="{y}" opacity="0">'
+            f'    <text x="{x}" y="{y}" opacity="1">'
             f'<tspan fill="{THEME["key"]}" font-weight="600">{escape(label)}</tspan>'
             f'<tspan fill="{THEME["value"]}">{escape(value)}</tspan>'
             f'{fade(i + 2)}</text>'
@@ -87,7 +86,7 @@ def main():
     y += args.line_height * 2
     swatches = ["#0e4429", "#006d32", "#26a641", "#39d353",
                 "#58a6ff", "#8b949e", "#c9d1d9"]
-    out.append(f'    <g opacity="0">{fade(total_lines - 1)}')
+    out.append(f'    <g opacity="1">{fade(total_lines - 1)}')
     for i, colour in enumerate(swatches):
         out.append(f'      <rect x="{x + i * 22}" y="{y - 11}" width="18" '
                    f'height="11" rx="2" fill="{colour}"/>')

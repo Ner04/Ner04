@@ -17,6 +17,8 @@ from xml.sax.saxutils import escape
 import numpy as np
 from PIL import Image
 
+from smil import fade_in
+
 # Dark to light. The leading space is the background.
 RAMP = " .:-=+*#%@"
 
@@ -41,9 +43,6 @@ def build_svg(lines, args):
     width = int(text_w) + args.padding * 2
     height = int(len(lines) * args.line_height) + args.padding * 2
 
-    # Rows appear on a stagger and then freeze. Looping back to invisible would
-    # leave the README blank for whoever lands on it mid-cycle.
-    stagger = args.duration / max(len(lines), 1)
 
     out = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" '
@@ -55,15 +54,13 @@ def build_svg(lines, args):
 
     for i, line in enumerate(lines):
         y = args.padding + (i + 1) * args.line_height
-        begin = round(i * stagger, 3)
         # textLength pins each row to an exact width, so the portrait keeps its
         # proportions no matter which monospace font the viewer actually has.
         out.append(
             f'    <text x="{args.padding}" y="{y}" fill="{args.color}" '
             f'textLength="{round(text_w, 2)}" lengthAdjust="spacingAndGlyphs" '
-            f'opacity="0">{escape(line)}'
-            f'<animate attributeName="opacity" from="0" to="1" '
-            f'begin="{begin}s" dur="{round(stagger * 2, 3)}s" fill="freeze"/>'
+            f'opacity="1">{escape(line)}'
+            f'{fade_in(i, len(lines), args.duration)}'
             f'</text>'
         )
 
