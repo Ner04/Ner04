@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Render a contribution calendar JSON file as an animated SVG heatmap.
 
-Squares fade in column by column (week by week), left to right, and stay put
-once they land. SMIL only, so it renders inside a GitHub README.
+Squares are painted statically so the grid is legible with or without
+animation; a scan sweep passes over the top. SMIL only, so it renders inside
+a GitHub README.
 
     python3 scripts/render_heatmap_svg.py --input data/contributions.json \
         --output assets/heatmap.svg
@@ -14,7 +15,7 @@ import os
 from datetime import date
 from xml.sax.saxutils import escape
 
-from smil import fade_in
+from smil import scan_sweep
 
 # GitHub's dark-theme contribution palette, level 0 through 4.
 LEVELS = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"]
@@ -51,8 +52,8 @@ def main():
     p.add_argument("--text", default="#8b949e")
     p.add_argument("--title", default=None,
                    help="heading text (default: derived from the data)")
-    p.add_argument("--duration", type=float, default=4.0,
-                   help="seconds for the grid to fill in")
+    p.add_argument("--duration", type=float, default=6.0,
+                   help="seconds for one pass of the scan sweep")
     p.add_argument("--font", default="SFMono-Regular,Consolas,Menlo,monospace")
     args = p.parse_args()
 
@@ -119,9 +120,8 @@ def main():
 
         out.append(
             f'    <rect x="{x}" y="{y}" width="{args.cell}" '
-            f'height="{args.cell}" rx="2" fill="{fill}" opacity="1">'
+            f'height="{args.cell}" rx="2" fill="{fill}">'
             f'<title>{day["count"]} contribution{plural} on {day["date"]}</title>'
-            f'{fade_in(week, weeks, args.duration)}'
             f'</rect>'
         )
     out.append('  </g>')
@@ -137,6 +137,7 @@ def main():
                    f'fill="{colour}"/>')
     out.append(f'  <text x="{legend_x + len(LEVELS) * step + 4}" y="{legend_y}" '
                f'fill="{args.text}" font-size="9">More</text>')
+    out.append('  ' + scan_sweep(width, height, args.duration))
     out.append('</svg>')
 
     os.makedirs(os.path.dirname(os.path.abspath(args.output)), exist_ok=True)

@@ -2,8 +2,9 @@
 """Render a neofetch-style info card as an animated SVG.
 
 Reads the card's content from a JSON file so the text can be edited without
-touching this script. Lines fade in on a stagger and freeze. SMIL only, so
-GitHub's README sanitiser leaves it alone.
+touching this script. Rows are painted statically, with a scan sweep and a
+blinking cursor as decoration. SMIL only, so GitHub's sanitiser leaves it
+alone.
 
     python3 scripts/make_infocard_svg.py --config data/infocard.json \
         --output assets/infocard.svg
@@ -14,7 +15,7 @@ import json
 import os
 from xml.sax.saxutils import escape
 
-from smil import fade_in
+from smil import blink, scan_sweep
 
 THEME = {
     "background": "#0d1117",
@@ -36,8 +37,8 @@ def main():
     p.add_argument("--line-height", type=float, default=19.0)
     p.add_argument("--padding", type=int, default=20)
     p.add_argument("--font", default="SFMono-Regular,Consolas,Menlo,monospace")
-    p.add_argument("--duration", type=float, default=4.0,
-                   help="seconds for every line to appear")
+    p.add_argument("--duration", type=float, default=6.0,
+                   help="seconds for one pass of the scan sweep")
     args = p.parse_args()
 
     with open(args.config) as f:
@@ -51,10 +52,6 @@ def main():
 
     key_w = max((len(r[0]) for r in rows if r[0]), default=0)
 
-    def fade(index):
-        """SMIL fade-in for the nth line, frozen once it lands."""
-        return fade_in(index, total_lines, args.duration)
-
     x = args.padding
     out = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{args.width}" '
@@ -67,32 +64,38 @@ def main():
 
     y = args.padding + args.line_height
     out.append(f'    <text x="{x}" y="{y}" fill="{THEME["accent"]}" '
-               f'font-weight="700" opacity="1">{escape(header)}{fade(0)}</text>')
+               f'font-weight="700">{escape(header)}</text>')
 
     y += args.line_height
     out.append(f'    <text x="{x}" y="{y}" fill="{THEME["muted"]}" '
-               f'opacity="1">{"-" * len(header)}{fade(1)}</text>')
+               f'>{"-" * len(header)}</text>')
 
     for i, (key, value) in enumerate(rows):
         y += args.line_height
         label = f"{key}:".ljust(key_w + 2) if key else " " * (key_w + 2)
         out.append(
-            f'    <text x="{x}" y="{y}" opacity="1">'
+            f'    <text x="{x}" y="{y}">'
             f'<tspan fill="{THEME["key"]}" font-weight="600">{escape(label)}</tspan>'
             f'<tspan fill="{THEME["value"]}">{escape(value)}</tspan>'
-            f'{fade(i + 2)}</text>'
+            f'</text>'
         )
 
     y += args.line_height * 2
     swatches = ["#0e4429", "#006d32", "#26a641", "#39d353",
                 "#58a6ff", "#8b949e", "#c9d1d9"]
-    out.append(f'    <g opacity="1">{fade(total_lines - 1)}')
+    out.append('    <g>')
     for i, colour in enumerate(swatches):
         out.append(f'      <rect x="{x + i * 22}" y="{y - 11}" width="18" '
                    f'height="11" rx="2" fill="{colour}"/>')
     out.append('    </g>')
 
     out.append('  </g>')
+    cursor_x = x + (len(header) + 1) * args.font_size * 0.6
+    cursor_y = args.padding + args.line_height - args.font_size * 0.85
+    out.append('  ' + blink(round(cursor_x, 2), round(cursor_y, 2),
+                            round(args.font_size * 0.6, 2), args.font_size,
+                            colour=THEME["accent"]))
+    out.append('  ' + scan_sweep(args.width, height, args.duration))
     out.append('</svg>')
 
     os.makedirs(os.path.dirname(os.path.abspath(args.output)), exist_ok=True)

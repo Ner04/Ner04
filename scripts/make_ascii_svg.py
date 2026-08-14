@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Turn a prepared photo into a self-typing ASCII portrait as an SVG.
+"""Turn a prepared photo into an ASCII portrait as an SVG.
 
 The animation is pure SMIL so it survives GitHub's README sanitiser, which
-strips <script> and almost all inline CSS but renders SVG untouched. Each row
-of characters is a <text> element that fades in on a stagger, giving a
-line-by-line typing effect, then freezes.
+strips <script> and almost all inline CSS but renders SVG untouched. Each
+row of characters is a <text> element, painted at full opacity, with a scan
+sweep animated over the top.
 
     python3 scripts/make_ascii_svg.py --input assets/prepped.png \
         --output assets/portrait.svg
@@ -17,7 +17,7 @@ from xml.sax.saxutils import escape
 import numpy as np
 from PIL import Image
 
-from smil import fade_in
+from smil import scan_sweep
 
 # Dark to light. The leading space is the background.
 RAMP = " .:-=+*#%@"
@@ -59,12 +59,12 @@ def build_svg(lines, args):
         out.append(
             f'    <text x="{args.padding}" y="{y}" fill="{args.color}" '
             f'textLength="{round(text_w, 2)}" lengthAdjust="spacingAndGlyphs" '
-            f'opacity="1">{escape(line)}'
-            f'{fade_in(i, len(lines), args.duration)}'
-            f'</text>'
+            f'>{escape(line)}</text>'
         )
 
     out.append('  </g>')
+    out.append('  ' + scan_sweep(width, height, args.duration,
+                                 colour=args.color))
     out.append('</svg>')
     return "\n".join(out)
 
@@ -84,8 +84,8 @@ def main():
     p.add_argument("--color", default="#39d353", help="glyph colour")
     p.add_argument("--background", default="#0d1117")
     p.add_argument("--padding", type=int, default=14)
-    p.add_argument("--duration", type=float, default=4.0,
-                   help="seconds for the portrait to finish typing")
+    p.add_argument("--duration", type=float, default=6.0,
+                   help="seconds for one pass of the scan sweep")
     args = p.parse_args()
 
     lines = to_ascii(args.input, args.cols, args.char_aspect)
