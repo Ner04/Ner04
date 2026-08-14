@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="mailto:shubhamnayak0904@gmail.com">
-    <img src="https://img.shields.io/badge/Email-shubhamnayak0904%40gmail.com-ffffff?style=flat-square&logo=gmail&logoColor=white&labelColor=1f6feb" alt="Email">
+    <img src="https://img.shields.io/badge/Email-shubhamnayak0904%40gmail.com-30363d?style=flat-square&logo=gmail&logoColor=white&labelColor=1f6feb&color=30363d" alt="Email">
   </a>
 </p>
 
@@ -49,13 +49,13 @@ Currently going deep on **Data Structures & Algorithms**, **Low-Level Design**,
 **Backend & data**
 
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white)
-![Kafka](https://img.shields.io/badge/Apache%20Kafka-231F20?style=flat-square&logo=apachekafka&logoColor=white)
+![Kafka](https://img.shields.io/badge/Apache%20Kafka-4B4B4B?style=flat-square&logo=apachekafka&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
 ![Microservices](https://img.shields.io/badge/Microservices-005571?style=flat-square&logo=springboot&logoColor=white)
 
 **Infrastructure**
 
-![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazonwebservices&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-FF9900?style=flat-square&logoColor=white)
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=flat-square&logo=kubernetes&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
 ![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=flat-square&logo=terraform&logoColor=white)
@@ -64,7 +64,7 @@ Currently going deep on **Data Structures & Algorithms**, **Low-Level Design**,
 
 ![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS-1572B6?style=flat-square&logo=css&logoColor=white)
 
 ---
 
