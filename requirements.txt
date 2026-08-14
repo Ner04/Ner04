@@ -1,0 +1,10 @@
+# Core - needed for the daily heatmap refresh in CI.
+requests>=2.31
+beautifulsoup4>=4.12
+pillow>=10.0
+numpy>=1.26
+
+# Optional - background removal for the ASCII portrait. Heavy (pulls
+# onnxruntime and a ~176MB model), and only needed when regenerating the
+# portrait locally, so it is not installed in CI.
+# rembg[cpu]>=2.0
