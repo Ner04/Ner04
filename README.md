@@ -3,15 +3,15 @@
 <table>
 <tr>
 <td valign="top" align="center">
-  <img src="assets/portrait.svg" alt="ASCII portrait of Shubham Nayak" width="440">
+  <img src="assets/portrait.svg?v=3" alt="ASCII portrait of Shubham Nayak" width="440">
 </td>
 <td valign="top" align="center">
-  <img src="assets/infocard.svg" alt="Profile info card" width="520">
+  <img src="assets/infocard.svg?v=3" alt="Profile info card" width="520">
 </td>
 </tr>
 </table>
 
-<img src="assets/heatmap.svg" alt="Contribution heatmap" width="980">
+<img src="assets/heatmap.svg?v=3" alt="Contribution heatmap" width="980">
 
 </div>
 

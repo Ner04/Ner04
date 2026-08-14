@@ -1,7 +1,7 @@
 # Deliberately not called USER: the shell exports that already, and an env
 # var would silently win over this default.
 GH_USER ?= Ner04
-PHOTO   ?= assets/avatar_src.png
+PHOTO   ?= assets/passport.png
 PYTHON  ?= python3
 
 .PHONY: all portrait infocard heatmap clean
@@ -11,7 +11,8 @@ all: portrait infocard heatmap
 # Background removal needs rembg, which is a heavy optional dependency.
 # Without it prep_photo.py falls back to a plain center-crop.
 portrait:
-	$(PYTHON) scripts/prep_photo.py --input $(PHOTO) --output assets/prepped.png
+	$(PYTHON) scripts/prep_photo.py --input $(PHOTO) --output assets/prepped.png \
+		--trim-bottom 0.34
 	$(PYTHON) scripts/make_ascii_svg.py --input assets/prepped.png \
 		--output assets/portrait.svg --cols 88 --font-size 8 --line-height 8
 

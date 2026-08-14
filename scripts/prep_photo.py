@@ -43,6 +43,10 @@ def main():
                    help="brightness multiplier (default: 1.0)")
     p.add_argument("--no-bg-removal", action="store_true",
                    help="skip rembg even if it is installed")
+    p.add_argument("--trim-bottom", type=float, default=0.0,
+                   help="fraction of the subject's height to cut from the "
+                        "bottom after cropping, e.g. 0.35 for head and "
+                        "shoulders only (default: 0.0)")
     p.add_argument("--no-crop", action="store_true",
                    help="keep the original framing instead of cropping to "
                         "the subject after background removal")
@@ -72,6 +76,13 @@ def main():
             lambda p: 255 if p > 25 else 0)
         box = mask.getbbox()
         if box:
+            if args.trim_bottom:
+                # Drop the lower part of the subject so the face fills the
+                # frame instead of sharing it with a torso, which converts to
+                # a featureless block of the densest glyph.
+                left, top, right, bottom = box
+                bottom = top + int((bottom - top) * (1 - args.trim_bottom))
+                box = (left, top, right, max(bottom, top + 1))
             img = img.crop(box)
             edge = max(img.size)
             img = ImageOps.pad(img, (edge, edge), color=(255, 255, 255),
