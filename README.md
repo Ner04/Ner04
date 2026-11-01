@@ -51,6 +51,19 @@ Currently going deep on **Distributed Systems**, **High-Level Design** and **Low
 **[I Tried to Rebuild WhatsApp on a Whiteboard. The Server Forgets Everything — On Purpose.](https://medium.com/@shubhamnayak0904/i-tried-to-rebuild-whatsapp-on-a-whiteboard-the-server-forgets-everything-on-purpose-830946c1d798)**
 A high-level design walkthrough of a 1-billion-user chat app — ticks, multi-device, sharding, calls.
 
+**More posts**
+
+| Post | Published |
+| --- | --- |
+| [The Double Charge Bug: Why Every Payment API Needs Idempotency](https://medium.com/@shubhamnayak0904/the-double-charge-bug-why-every-payment-api-needs-idempotency-cbec2ac1721d) | Nov 2026 |
+| [Netflix Is a Pizza Shop That Never Makes You Wait (So I Built One in Java)](https://medium.com/@shubhamnayak0904/netflix-is-a-pizza-shop-that-never-makes-you-wait-so-i-built-one-in-java-68eafb67f417) | Oct 2026 |
+| [I Built Zomato in 400 Lines of Java (And Learned Why Your Biryani Never Gets Delivered Twice)](https://medium.com/@shubhamnayak0904/i-built-zomato-in-400-lines-of-java-and-learned-why-your-biryani-never-gets-delivered-twice-447fbab9bfd7) | Oct 2026 |
+| [ACID vs BASE: The Interview Cheat Sheet You'll Actually Remember](https://medium.com/@shubhamnayak0904/acid-vs-base-the-interview-cheat-sheet-youll-actually-remember-731bcb8cfb86) | Oct 2026 |
+| [Designing a Booking System That Never Double-Books](https://medium.com/@shubhamnayak0904/designing-a-booking-system-that-never-double-books-e4bb8c9884f0) | Oct 2026 |
+| [Designing a URL Shortener: From Short Codes to Scale](https://medium.com/@shubhamnayak0904/designing-a-url-shortener-from-short-codes-to-scale-77e2cbc82905) | Sep 2026 |
+
+[All posts on Medium →](https://medium.com/@shubhamnayak0904)
+
 ---
 
 ### Stack
